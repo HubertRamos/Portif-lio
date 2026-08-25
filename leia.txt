@@ -1,0 +1,1 @@
+window.openWindow("neoFetch", "segunda-janela")
