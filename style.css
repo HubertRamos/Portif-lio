@@ -42,6 +42,18 @@ main {
   overflow-y: auto;  
 }
 
+/* Estado da janela maximizada */
+.window-pane.maximized {
+  position: absolute !important;
+  top: 5px !important;
+  left: 5px !important;
+  right: 5px !important;
+  bottom: 5px !important;
+  width: calc(100% - 10px) !important;
+  height: calc(100vh - 20px) !important;
+  z-index: 999;
+}
+
 @media (max-width: 768px) {
   main {
     flex-direction: column; 

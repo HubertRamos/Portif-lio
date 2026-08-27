@@ -1,21 +1,21 @@
 import CommandInput from "./src/components/CmdInput/index.js";
-import Commands from "./src/constantes/cmds.js";
+import { Commands, Windows } from "./src/constantes/cmds.js";
 import NeoFetch from "./src/components/NeoFetch/index.js";
 
 const style = {
   windowTitlebar: `
-  background: #3b4252;
-  padding: 8px 12px;
-  font-size: 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top-left-radius: 7px;
-  border-top-right-radius: 7px;
-  color: #eceff4;
-  flex-shrink: 0; 
-`,
-  button: `
+    background: #3b4252;
+    padding: 8px 12px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    color: #eceff4;
+    flex-shrink: 0; 
+  `,
+  buttonClose: `
     background: #bf616a; 
     border: none; 
     width: 12px; 
@@ -23,6 +23,19 @@ const style = {
     border-radius: 50%; 
     cursor: pointer;
   `,
+  buttonMaximize: `
+    background: #a3be8c; 
+    border: none; 
+    width: 12px; 
+    height: 12px; 
+    border-radius: 50%; 
+    cursor: pointer;
+  `,
+  windowButtons: `
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  `
 };
 
 let windowStates = [{ id: 1, type: "profile", title: "neofetch" }];
@@ -38,15 +51,22 @@ export default function renderWindows() {
     painel.className = "window-pane";
     painel.id = `window-${win.id}`;
 
+    // Botão de fechar (apenas se não for a primeira janela)
     const botaoFechar =
       win.id === 1
         ? ""
-        : `<button onclick="window.closeWindow(${win.id})" style="${style.button}"></button>`;
+        : `<button onclick="window.closeWindow(${win.id})" style="${style.buttonClose}" title="Fechar"></button>`;
+
+    // Botão de maximizar presente em todas as janelas
+    const botaoMaximizar = `<button onclick="window.toggleMaximize(${win.id})" style="${style.buttonMaximize}" title="Maximizar"></button>`;
 
     painel.innerHTML = `
       <div style="${style.windowTitlebar}">
         <span>~/${win.title}</span>
-        ${botaoFechar} 
+        <div style="${style.windowButtons}">
+          ${botaoMaximizar}
+          ${botaoFechar}
+        </div>
       </div>
       <div class="window-content terminal" id="content-${win.id}" style="padding: 15px; flex: 1; overflow-y: auto;">
       </div>
@@ -68,11 +88,13 @@ export default function renderWindows() {
         if (comandoEscolhido === "clear") {
         }
       });
+    } else {
+      Windows(win.type, contentConteiner);
     }
   });
 }
 
-window.openWindow = function(type, title) {
+window.openWindow = function (type, title) {
   const lastId =
     windowStates.length > 0 ? windowStates[windowStates.length - 1].id : 0;
   const newId = lastId + 1;
@@ -86,10 +108,18 @@ window.openWindow = function(type, title) {
   renderWindows();
 };
 
-window.closeWindow = function(id) {
+window.closeWindow = function (id) {
   if (windowStates.length === 1) return;
 
   windowStates = windowStates.filter((win) => win.id !== id);
 
   renderWindows();
+};
+
+// Função para alternar o estado de maximizado da janela
+window.toggleMaximize = function (id) {
+  const painel = document.getElementById(`window-${id}`);
+  if (painel) {
+    painel.classList.toggle("maximized");
+  }
 };

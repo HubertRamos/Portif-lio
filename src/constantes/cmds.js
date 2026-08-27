@@ -6,7 +6,7 @@ export const comandos = [
     { cmd: "clear", label: "clear", desc: "Limpa o terminal" }
   ];
 
-export default function Commands(comandoEscolhido) {
+export function Commands(comandoEscolhido) {
   console.log("Comando escolhido:", comandoEscolhido);
   switch (comandoEscolhido) {
     case "neofetch":
@@ -34,3 +34,10 @@ export default function Commands(comandoEscolhido) {
   }
 }
 
+export function Windows(type, conteiner){
+  if(type === "skills"){
+    conteiner.innerHTML = `
+      Tá funfando
+    `
+  }
+}
