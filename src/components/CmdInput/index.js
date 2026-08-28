@@ -1,4 +1,3 @@
-import { comandos } from "../../constantes/cmds.js";
 
 const style = {
   input: `
@@ -35,7 +34,7 @@ const style = {
   `,
 };
 
-export default function CommandInput(container, onExecuteCommand) {
+export default function CommandInput(container, onExecuteCommand, comandos) {
   if (!container) return;
 
   let selectedIndex = 0;

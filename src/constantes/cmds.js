@@ -1,3 +1,5 @@
+import Projects from "../app/projects.js";
+
 export const comandos = [
     { cmd: "neofetch", label: "neofetch", desc: "Exibe o resumo do perfil" },
     { cmd: "skills", label: "cat skills.md", desc: "Lista as tecnologias e stacks" },
@@ -39,5 +41,7 @@ export function Windows(type, conteiner){
     conteiner.innerHTML = `
       Tá funfando
     `
+  }else if(type === "projects"){
+    Projects(conteiner)
   }
 }

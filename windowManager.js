@@ -1,5 +1,5 @@
 import CommandInput from "./src/components/CmdInput/index.js";
-import { Commands, Windows } from "./src/constantes/cmds.js";
+import { Commands, Windows, comandos } from "./src/constantes/cmds.js";
 import NeoFetch from "./src/components/NeoFetch/index.js";
 
 const style = {
@@ -82,12 +82,12 @@ export default function renderWindows() {
       const commandWrapper = document.createElement("div");
       contentConteiner.appendChild(commandWrapper);
 
-      CommandInput(commandWrapper, (comandoEscolhido) => {
+      CommandInput( commandWrapper, (comandoEscolhido) => {
         console.log("Comando escolhido:", comandoEscolhido);
         Commands(comandoEscolhido);
         if (comandoEscolhido === "clear") {
         }
-      });
+      }, comandos );
     } else {
       Windows(win.type, contentConteiner);
     }
