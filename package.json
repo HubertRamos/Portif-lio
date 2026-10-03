@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "node server.js",
-    "build": "node -c server.js main.js windowManager.js",
-    "lint": "node -c server.js main.js windowManager.js src/app/projects.js src/services/githubService.js src/components/CmdInput/index.js src/components/NeoFetch/index.js src/components/WelcomeBanner/index.js src/constantes/cmds.js src/constantes/filesystem.js src/constantes/linguagens.js",
+    "build": "node -c server.js main.js windowManager.js api/repos.js",
+    "lint": "node -c server.js main.js windowManager.js api/repos.js src/app/projects.js src/services/githubService.js src/components/CmdInput/index.js src/components/NeoFetch/index.js src/components/WelcomeBanner/index.js src/constantes/cmds.js src/constantes/filesystem.js src/constantes/linguagens.js",
     "start": "node server.js"
   },
   "dependencies": {

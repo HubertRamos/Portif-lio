@@ -14,7 +14,7 @@ const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes cache per user
 
 // Multi-user GitHub repositories proxy endpoint
 app.get('/api/repos', async (req, res) => {
-  const usersParam = req.query.users || 'hubertramos';
+  const usersParam = req.query.users || 'hubertramos,hubertvariant';
   const usernames = usersParam
     .split(',')
     .map((u) => u.trim().replace(/^@/, ''))
